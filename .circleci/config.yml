@@ -1,42 +1,12 @@
 version: 2.1
-
-# make it dynamic
-setup: true
-
-# Define the jobs we want to run for this project
 jobs:
   build:
     docker:
-      - image: cimg/base:2023.03
+      - image: cimg/base:current
+    resource_class: petez7519/runner_pez
     steps:
-      - checkout
-      - run: echo "this is the build job"
-  test:
-    docker:
-      - image: cimg/base:2023.03
-    steps:
-      - checkout
-      - run: echo "this is the test job"
-  deploy:
-    docker:
-      - image: cimg/base:2023.03
-    steps:
-      - checkout
-      - run: echo "this is the deploy job"
-
-# Orchestrate our job run sequence
+      - run: echo "Hi I'm on a Container Runner!"
 workflows:
-  build_and_test:
+  build-workflow:
     jobs:
       - build
-      - test:
-          requires:
-            - build
-      - hold:
-          type: approval
-          requires:
-            - build
-            - test
-      - deploy:
-          requires:
-            - hold
