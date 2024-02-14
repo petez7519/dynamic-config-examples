@@ -1,12 +1,16 @@
 version: 2.1
+
 jobs:
   build:
-    docker:
-      - image: cimg/base:current
-    resource_class: petez7519/runner_pez
+    macos:
+      xcode: "12.0.0" # specify the Xcode version
     steps:
-      - run: echo "Hi I'm on a Container Runner!"
-workflows:
-  build-workflow:
-    jobs:
-      - build
+      - run:
+          name: Check OS Type
+          command: |
+            if [ "$(uname)" == "Darwin" ]; then
+              echo "This is a macOS operating system."
+            else
+              echo "This is not a macOS operating system."
+            fi
+
