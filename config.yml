@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Execute bash script
-          command: bash ./hello-World.sh
+          command: bash ./Users/petezelinski/Applications/demo/hello-World.sh
 workflows:
   version: 2
   build-deploy:
